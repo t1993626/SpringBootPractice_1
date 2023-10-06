@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form method="POST" action="/demo/insert">
+        <div style="display:block;">
+            <input type="text" name="empno" required>
+            <input type="text" name="ename" required>
+            <input type="text" name="job" required>
+            <input type="text" name="sal" required>
+            <input type="text" name="comm" required>
+            <input type="text" name="picFormat" required>
+            <input type="text" name="deptno" required>
+        </div>
+        <button class="insertbutton" type="submit">送出</button>
+    </form>
+<script>
+
+    function postData() {
+    const empno = document.querySelector('input[name="empno"]').value;
+    const empname = document.querySelector('input[name="ename"]').value;
+    const job = document.querySelector('input[name="job"]').value;
+    const sal = document.querySelector('input[name="sal"]').value;
+    const comm = document.querySelector('input[name="comm"]').value;
+    const picFormat = document.querySelector('input[name="picFormat"]').value;
+    const deptno = document.querySelector('input[name="deptno"]').value;
+
+    const empData = {
+        empno,
+        ename,
+        job,
+        sal,
+        comm,
+        picFormat,
+        deptno
+    };
+
+    fetch('/demo/insert', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: new URLSearchParams({ emp: JSON.stringify(empData) })
+    })
+    .then(response => {
+        if (response.ok) {
+            window.alert('資料已成功提交');
+            window.location.href = 'http://localhost:8080/insert.html';
+        } else {
+            console.error('資料提交失敗');	
+        }
+    })
+    .catch(error => {
+        console.error('發生錯誤:', error);
+    });
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<button class="getDeptno" onclick="getInfo()">取得部門資料</button>
+<select name="dept" id="deptnfo">
+</select>
+
+<script>
+    function getInfo(){
+        fetch('/demo/getInfo',{
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        }).then(response =>response.json())
+            .then(data=>{
+                const selectElement = document.getElementById('deptnfo');
+            selectElement.innerHTML = ''; 
+
+            data.forEach(emp => {
+                const option = document.createElement('option');
+                option.value = emp.empno; 
+                option.text = emp.job; 
+                selectElement.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('error', error);
+            })
+    }
+
+</script>
+</body>
+</html>
