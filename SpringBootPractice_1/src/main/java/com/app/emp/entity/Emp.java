@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Emp {
 	@Id
 	Integer empno;
-	String empname;
+	String ename;
 	String job;
 	Timestamp hiredate;
 	Double sal;
@@ -29,12 +29,12 @@ public class Emp {
 		this.empno = empno;
 	}
 
-	public String getEmpname() {
-		return empname;
+	public String getename() {
+		return ename;
 	}
 
-	public void setEmpname(String empname) {
-		this.empname = empname;
+	public void setename(String ename) {
+		this.ename = ename;
 	}
 
 	public String getJob() {
@@ -93,11 +93,11 @@ public class Emp {
 		this.deptno = deptno;
 	}
 
-	public Emp(Integer empno, String empname, String job, Timestamp hiredate, Double sal, Double comm, byte[] picture,
+	public Emp(Integer empno, String ename, String job, Timestamp hiredate, Double sal, Double comm, byte[] picture,
 			String picFormat, Integer deptno) {
 		super();
 		this.empno = empno;
-		this.empname = empname;
+		this.ename = ename;
 		this.job = job;
 		this.hiredate = hiredate;
 		this.sal = sal;
@@ -113,7 +113,7 @@ public class Emp {
 
 	@Override
 	public String toString() {
-		return "Emp [empno=" + empno + ", empname=" + empname + ", job=" + job + ", hiredate=" + hiredate + ", sal=" + sal
+		return "Emp [empno=" + empno + ", ename=" + ename + ", job=" + job + ", hiredate=" + hiredate + ", sal=" + sal
 				+ ", comm=" + comm + ", picture=" + Arrays.toString(picture) + ", picFormat=" + picFormat + ", deptno="
 				+ deptno + "]";
 	}
