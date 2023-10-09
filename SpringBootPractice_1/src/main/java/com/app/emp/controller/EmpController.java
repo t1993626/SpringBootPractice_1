@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.emp.entity.Emp;
@@ -18,7 +19,7 @@ public class EmpController {
 	EmpService empService;
 	
 	@PostMapping("/demo/insert")
-	public ResponseEntity<String> insert(@ModelAttribute Emp emp) {
+	public ResponseEntity<String> insert(@RequestBody Emp emp) {
 	    empService.insert(emp);
 	    return ResponseEntity.ok("success");
 	}

@@ -8,22 +8,18 @@
 </head>
 <body>
     
-    <form method="POST" action="/demo/insert">
-        <div style="display:block;">
-            <input type="text" name="empno" required>
+<!--            <input type="text" name="empno" required>-->
             <input type="text" name="ename" required>
             <input type="text" name="job" required>
             <input type="text" name="sal" required>
             <input type="text" name="comm" required>
             <input type="text" name="picFormat" required>
             <input type="text" name="deptno" required>
-        </div>
-        <button class="insertbutton" type="submit">送出</button>
-    </form>
+        <button class="insertbutton" type="button" onclick="postData()">送出</button>
 <script>
 
     function postData() {
-    const empno = document.querySelector('input[name="empno"]').value;
+    //const empno = document.querySelector('input[name="empno"]').value;
     const ename = document.querySelector('input[name="ename"]').value;
     const job = document.querySelector('input[name="job"]').value;
     const sal = document.querySelector('input[name="sal"]').value;
@@ -32,7 +28,7 @@
     const deptno = document.querySelector('input[name="deptno"]').value;
 
     const empData = {
-        empno,
+      //  empno,
         ename,
         job,
         sal,
@@ -44,9 +40,17 @@
     fetch('/demo/insert', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            'Content-Type': 'application/json'
         },
-        body: new URLSearchParams({ emp: JSON.stringify(empData) })
+        body: JSON.stringify({
+			//empno:empno,
+			ename:ename,
+			job:job,
+	        sal:sal,
+	        comm:comm,
+	        picFormat:picFormat,
+	        deptno:deptno
+		})
     })
     .then(response => {
         if (response.ok) {

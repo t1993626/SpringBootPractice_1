@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "emp2")
 public class Emp {
 	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer empno;
 	String ename;
 	String job;
