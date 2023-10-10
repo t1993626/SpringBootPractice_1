@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+            <input type="text" name="variable" required>
+            <input type="text" name="value" required>
+            <input type="text" name="set_by" required>
+        <button class="insertbutton" type="button" onclick="postData()">送出</button>
+<script>
+
+    function postData() {
+    const variable = document.querySelector('input[name="variable"]').value;
+    const value = document.querySelector('input[name="value"]').value;
+    const set_by = document.querySelector('input[name="set_by"]').value;
+   
+
+    const sysData = {
+        variable,
+        value,
+        set_by
+    };
+	console.log(sysData);
+    fetch('/Sys/insert', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({variable:variable,
+        					value:value,
+        					set_by:set_by
+        					})
+    })
+    .then(response => {
+        if (response.ok) {
+            window.alert('資料已成功提交');
+            window.location.href = 'http://localhost:8080/insert.html';
+        } else {
+            console.error('資料提交失敗');	
+        }
+    })
+    .catch(error => {
+        console.error('發生錯誤:', error);
+    });
+}
+
+
+</script>
+</body>
+</html>
