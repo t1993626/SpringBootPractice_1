@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body onload="">
+	<input type="text" name="companyName" required>
+	<button type="button" onclick="insertInfo()">新增資料</button>
+
+<script>
+	function insertInfo(){
+		let companyName = document.querySelector('input[name="companyName"]').value;
+		fetch('/demo/insert',{
+			method:'POST',
+			headers:{
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				companyName:companyName
+			})
+			
+		}).then(response => {
+        if (response.ok) {
+            window.alert('資料已成功提交');
+            window.location.href = 'http://localhost:8080/getNewData.html';
+        } else {
+            console.error('資料提交失敗');	
+        }
+    })
+	}
+	
+	function getLastOne(){
+		
+	}
+
+</script>
+</body>
+</html>

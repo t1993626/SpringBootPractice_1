@@ -15,4 +15,7 @@ public class CompanyService {
 	public List<Company> findAll() {
 		return dao.findAll();
 	}
+	public void insert(Company company) {
+		dao.save(company);
+	}
 }

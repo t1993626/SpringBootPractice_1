@@ -1,77 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
+
 <body onload="addCompany()">
-    <select name="company" id="copmpanyId" onchange="addOrder()"></select>
-    <select name="order" id="orderId"></select>
-    <button type="button" onclick="getInfo()">搜尋</button>
-    <p>訂單資料:</p>
-    <div id="orderInfo">
-    </div>
+	<select name="company" id="copmpanyId" onchange="addOrder()"></select>
+	<select name="order" id="orderId"></select>
+	<button type="button" onclick="getInfo()">搜尋</button>
+	<p>訂單資料:</p>
+	<div id="orderInfo">
+	</div>
 
 
-<script>
-    function addCompany(){
-        fetch('/demo/findcompany' ,{method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-        },
-        }).then(response =>response.json())
-            .then(data=>{
-                const selectElement = document.getElementById('copmpanyId');
-                selectElement.innerHTML = ''; 
-                data.forEach(company => {
-                const option = document.createElement('option');
-                option.value = company.companyId; 
-                option.text = company.companyName; 
-                selectElement.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('error', error);
-            })
-    }
-    
-    function addOrder(){
-        const companyId = document.querySelector('#copmpanyId').value;
-       fetch('/demo/getOrder/'+companyId, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        }).then(response =>response.json())
-            .then(data=>{
-                const selectElement = document.getElementById('orderId');
-                selectElement.innerHTML = ''; 
-                data.forEach(order => {
-                const option = document.createElement('option');
-                option.value = order.orderId; 
-                option.text = order.orderName; 
-                selectElement.appendChild(option);
-            });
-    })
-}
+	<script>
+		function addCompany() {
+			fetch('/demo/findcompany', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+			}).then(response => response.json())
+				.then(data => {
+					const selectElement = document.getElementById('copmpanyId');
+					selectElement.innerHTML = '';
+					data.forEach(company => {
+						const option = document.createElement('option');
+						option.value = company.companyId;
+						option.text = company.companyName;
+						selectElement.appendChild(option);
+					});
+				})
+				.catch(error => {
+					console.error('error', error);
+				})
+		}
 
-function getInfo(){
-    const companyId = document.querySelector('#copmpanyId').value;
-    let OID = document.getElementById('orderId').value;
-    console.log(OID);
-    fetch('/demo/getInfo/'+OID,{
-        method: 'GET'
-    }).then(response =>response.json())
-            .then(data=>{
-                const orderInfo = document.getElementById('orderInfo');
-                orderInfo.innerHTML = ''; 
-                const span = document.createElement('span');
-                span.textContent = "訂單編號:"+data.orderId +" 訂單名稱:"+data.orderName;
-                orderInfo.appendChild(span);
-    })
-}
-</script>
+		function addOrder() {
+			const companyId = document.querySelector('#copmpanyId').value;
+			fetch('/demo/getOrder/' + companyId, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(response => response.json())
+				.then(data => {
+					const selectElement = document.getElementById('orderId');
+					selectElement.innerHTML = '';
+					data.forEach(order => {
+						const option = document.createElement('option');
+						option.value = order.orderId;
+						option.text = order.orderName;
+						selectElement.appendChild(option);
+					});
+				})
+		}
+
+		function getInfo() {
+			const companyId = document.querySelector('#copmpanyId').value;
+			let OID = document.getElementById('orderId').value;
+			console.log(OID);
+			fetch('/demo/getInfo/' + OID, {
+				method: 'GET'
+			}).then(response => response.json())
+				.then(data => {
+					const orderInfo = document.getElementById('orderInfo');
+					orderInfo.innerHTML = '';
+					const span = document.createElement('span');
+					span.textContent = "訂單編號:" + data.orderId + " 訂單名稱:" + data.orderName;
+					orderInfo.appendChild(span);
+				})
+		}
+	</script>
 </body>
+
 </html
